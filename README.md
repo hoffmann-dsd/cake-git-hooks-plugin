@@ -29,7 +29,7 @@ Check, if git hooks are installed and up to date. Returns a boolean.
 ```csharp
 ICakeContext context;
 
-var hooksUptoDate = CheckGitHooksUptoDate();
+var hooksUptoDate = context.CheckGitHooksUptoDate();
 ```
 
 ### DeployGitHooks
