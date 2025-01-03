@@ -1,4 +1,4 @@
-# cake-git-hooks-plugin
+# Cake.GitHooks
 
 ## Overview
 
