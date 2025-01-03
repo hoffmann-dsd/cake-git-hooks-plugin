@@ -22,14 +22,12 @@ InitialiseGitHooks(customSettings);
 ```
 The default setting of the git hooks **source** directory is `./hooks`. The git hooks are deployed to the **destination** directory `./.git/hooks`.
 
-### CheckGitHooksUptoDate
-
-Check, if git hooks are installed and up to date. Returns a boolean.
-
+### InitialiseGitHooks
+Checks and deploys hooks in a single step:
 ```csharp
 ICakeContext context;
 
-var hooksUptoDate = context.CheckGitHooksUptoDate();
+context.InitialiseGitHooks();
 ```
 
 ### DeployGitHooks
@@ -41,12 +39,14 @@ ICakeContext context;
 context.DeployGitHooks();
 ```
 
-### InitialiseGitHooks
-Checks and deploys hooks in a single step:
+### CheckGitHooksUptoDate
+
+Check, if git hooks are installed and up to date. Returns a boolean.
+
 ```csharp
 ICakeContext context;
 
-context.InitialiseGitHooks();
+var hooksUptoDate = context.CheckGitHooksUptoDate();
 ```
 
 ## Example build script
