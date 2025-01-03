@@ -66,7 +66,7 @@ The package is published to the GitHub Packages NuGet registry. To use the packa
 
 https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-nuget-registry#installing-a-package
 
-Add the CakeExt.Git NuGet package to your Cake build script project.
+Add the Cake.GitHooks NuGet package to your Cake build script project.
 ```csharp
 #addin nuget:?package=Cake.GitHooks
 ```
