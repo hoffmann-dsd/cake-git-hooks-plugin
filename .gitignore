@@ -1,6 +1,9 @@
 .DS_Store
 .idea
 
+artifacts/
+tools/
+
 bin/
 obj/
 

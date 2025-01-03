@@ -1,0 +1,29 @@
+name: Build Release / Publish NuGet
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 9.0.x
+    - name: Restore local tools
+      run: dotnet tool restore
+    - name: Build
+      run: dotnet cake
+
+    - name: Publish NuGet package
+      run: |
+        REPO_OWNER=$(echo $GITHUB_REPOSITORY | cut -d '/' -f 1) 
+        PACKAGE_PATH=$(find ./artifacts -name '*.nupkg' -print -quit)
+        dotnet nuget push "$PACKAGE_PATH" --source "https://api.nuget.org/v3/index.json" --api-key "${{ secrets.HOFFMANN_DSD_NUGETORG_TOKEN }}" --skip-duplicate
