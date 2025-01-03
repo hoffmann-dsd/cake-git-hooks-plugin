@@ -3,7 +3,7 @@ using Cake.Core.Annotations;
 using Cake.Common;
 using Cake.Common.Diagnostics;
 
-namespace CakeGit.Hooks;
+namespace Cake.GitHooks;
 
 [CakeAliasCategory("GitHooks")]
 public static class GitHooks

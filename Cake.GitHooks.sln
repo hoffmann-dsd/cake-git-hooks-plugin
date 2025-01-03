@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CakeGit.Hooks", "CakeGit.Hooks\CakeGit.Hooks.csproj", "{1F0381FA-3140-4BC2-9133-DBE3187D96E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.GitHooks", "Cake.GitHooks\Cake.GitHooks.csproj", "{1F0381FA-3140-4BC2-9133-DBE3187D96E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
