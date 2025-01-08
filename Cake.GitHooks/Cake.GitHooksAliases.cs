@@ -14,7 +14,6 @@ public static class GitHooks
         DestinationPath = "./.git/hooks"
     };
     
-    [CakeMethodAlias]
     private static bool AreGitHooksUptoDate(this ICakeContext ctx, GitHooksSettings? settings = null)
     {
         GitHooksSettings effectiveSettings = settings ?? DefaultSettings;
@@ -25,7 +24,7 @@ public static class GitHooks
         if (!Directory.Exists(effectiveSettings.SourcePath))
         {
             throw new DirectoryNotFoundException(
-                $"Error: Git hooks source files not found at the specified path: {effectiveSettings.SourcePath}"
+                $"Git hooks source files not found at the specified path: {effectiveSettings.SourcePath}"
                 );
         }
         
@@ -60,7 +59,6 @@ public static class GitHooks
         return !hooksChanged;
     }
 
-    [CakeMethodAlias]
     private static void CopyGitHooks(this ICakeContext ctx, GitHooksSettings? settings = null)
     {
         GitHooksSettings effectiveSettings = settings ?? DefaultSettings;
@@ -72,7 +70,7 @@ public static class GitHooks
         if (!Directory.Exists(effectiveSettings.SourcePath))
         {
             throw new DirectoryNotFoundException(
-                $"Error: Git hooks source files not found at the specified path: {effectiveSettings.SourcePath}"
+                $"Git hooks source files not found at the specified path: {effectiveSettings.SourcePath}"
                 );
         }
         
@@ -108,8 +106,11 @@ public static class GitHooks
     }
 
     [CakeMethodAlias]
-    public static void DeployGitHooks(this ICakeContext ctx, GitHooksSettings? settings = null)
+    public static void DeployGitHooks(this ICakeContext ctx, Func<GitHooksSettings, GitHooksSettings>? hooksSettings = null)
     {
+        var settings = DefaultSettings;
+        settings = hooksSettings?.Invoke(settings) ?? DefaultSettings;
+
         if (ctx.AreGitHooksUptoDate(settings) == false)
         {
             LoggingAliases.Information(ctx, "One or more Git hooks are missing or outdated. Deploying the latest versions.");
