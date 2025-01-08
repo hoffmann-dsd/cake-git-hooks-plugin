@@ -106,10 +106,10 @@ public static class GitHooks
     }
 
     [CakeMethodAlias]
-    public static void DeployGitHooks(this ICakeContext ctx, Func<GitHooksSettings, GitHooksSettings>? hooksSettings = null)
+    public static void DeployGitHooks(this ICakeContext ctx, Action<GitHooksSettings>? hooksSettings = null)
     {
         var settings = DefaultSettings;
-        settings = hooksSettings?.Invoke(settings) ?? DefaultSettings;
+        hooksSettings?.Invoke(settings);
 
         if (ctx.AreGitHooksUptoDate(settings) == false)
         {

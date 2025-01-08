@@ -2,7 +2,7 @@
 
 ## Overview
 
-Cake.GitHooks is a cake addin that provides functionality to manage your git hooks in your cake scripts. It provides a set of methods to check availability and to deploy your git hooks. These extensions aim to simplify distributing and updating git hooks across the contributors of your project.
+Cake.GitHooks is a cake addin that provides functionality to manage your git hooks in your cake scripts. It provides a simple API to check availability of your git hooks and to deploy them in a single step. This extension aims to simplify distributing and updating git hooks across the contributors of your project.
 
 ## Usage
 
@@ -10,7 +10,7 @@ Git hooks are sourced from a folder in your project. The addin installs the hook
 
 ### DeployGitHooks
 
-Deploy hooks to the local `.git/hooks` directory.
+Deploys hooks to the local `.git/hooks` directory. (Also checks if deployed git hooks are on the latest version)
 
 ```csharp
 DeployGitHooks();
@@ -25,7 +25,6 @@ DeployGitHooks(settings =>
 {
     settings.SourcePath = "./custom-hooks/";
     settings.DestinationPath = "./.git/hooks/";
-    return settings;
 });
 ```
 The default setting of the git hooks **source** directory is `./hooks`. The git hooks are deployed to the **destination** directory `./.git/hooks`.
