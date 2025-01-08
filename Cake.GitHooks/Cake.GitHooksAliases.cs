@@ -15,7 +15,7 @@ public static class GitHooks
     };
     
     [CakeMethodAlias]
-    public static bool CheckGitHooksUptoDate(this ICakeContext ctx, GitHooksSettings? settings = null)
+    private static bool AreGitHooksUptoDate(this ICakeContext ctx, GitHooksSettings? settings = null)
     {
         GitHooksSettings effectiveSettings = settings ?? DefaultSettings;
         
@@ -61,7 +61,7 @@ public static class GitHooks
     }
 
     [CakeMethodAlias]
-    public static void DeployGitHooks(this ICakeContext ctx, GitHooksSettings? settings = null)
+    private static void CopyGitHooks(this ICakeContext ctx, GitHooksSettings? settings = null)
     {
         GitHooksSettings effectiveSettings = settings ?? DefaultSettings;
         
@@ -108,12 +108,12 @@ public static class GitHooks
     }
 
     [CakeMethodAlias]
-    public static void InitialiseGitHooks(this ICakeContext ctx, GitHooksSettings? settings = null)
+    public static void DeployGitHooks(this ICakeContext ctx, GitHooksSettings? settings = null)
     {
-        if (ctx.CheckGitHooksUptoDate(settings) == false)
+        if (ctx.AreGitHooksUptoDate(settings) == false)
         {
             LoggingAliases.Information(ctx, "One or more Git hooks are missing or outdated. Deploying the latest versions.");
-            ctx.DeployGitHooks(settings);
+            ctx.CopyGitHooks(settings);
         }
         else
         {

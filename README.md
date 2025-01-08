@@ -8,7 +8,18 @@ Cake.GitHooks is a cake addin that provides functionality to manage your git hoo
 
 Git hooks are sourced from a folder in your project. The addin installs the hooks to your local git repository.
 
+### DeployGitHooks
+
+Deploy hooks to the local `.git/hooks` directory.
+
+```csharp
+ICakeContext context;
+
+context.DeployGitHooks();
+```
+
 ### Configuration
+
 To configure the source and destination path of your hooks, you can specify `GitHooksSettings` for each method.
 
 ```csharp
@@ -18,36 +29,9 @@ GitHooksSettings customSettings = new GitHooksSettings
         DestinationPath = "./.git/hooks/"
     };
 
-InitialiseGitHooks(customSettings);
+DeployGitHooks(customSettings);
 ```
 The default setting of the git hooks **source** directory is `./hooks`. The git hooks are deployed to the **destination** directory `./.git/hooks`.
-
-### InitialiseGitHooks
-Checks and deploys hooks in a single step:
-```csharp
-ICakeContext context;
-
-context.InitialiseGitHooks();
-```
-
-### DeployGitHooks
-
-Deploy hooks to the local `.git/hooks` directory.
-```csharp
-ICakeContext context;
-
-context.DeployGitHooks();
-```
-
-### CheckGitHooksUptoDate
-
-Check, if git hooks are installed and up to date. Returns a boolean.
-
-```csharp
-ICakeContext context;
-
-var hooksUptoDate = context.CheckGitHooksUptoDate();
-```
 
 ## Example build script
 
@@ -55,7 +39,7 @@ var hooksUptoDate = context.CheckGitHooksUptoDate();
 Task("Setup-GitHooks")
     .Does(() =>
 {
-    InitialiseGitHooks();
+    DeployGitHooks();
 });
 
 RunTarget("Setup-GitHooks");
