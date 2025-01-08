@@ -13,23 +13,20 @@ Git hooks are sourced from a folder in your project. The addin installs the hook
 Deploy hooks to the local `.git/hooks` directory.
 
 ```csharp
-ICakeContext context;
-
-context.DeployGitHooks();
+DeployGitHooks();
 ```
 
 ### Configuration
 
-To configure the source and destination path of your hooks, you can specify `GitHooksSettings` for each method.
+To configure the source and destination path of your hooks, you can build `GitHooksSettings` for each method.
 
 ```csharp
-GitHooksSettings customSettings = new GitHooksSettings
-    {
-        SourcePath = "./custom-hooks/",
-        DestinationPath = "./.git/hooks/"
-    };
-
-DeployGitHooks(customSettings);
+DeployGitHooks(settings => 
+{
+    settings.SourcePath = "./custom-hooks/";
+    settings.DestinationPath = "./.git/hooks/";
+    return settings;
+});
 ```
 The default setting of the git hooks **source** directory is `./hooks`. The git hooks are deployed to the **destination** directory `./.git/hooks`.
 
