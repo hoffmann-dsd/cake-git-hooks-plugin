@@ -1,4 +1,4 @@
-﻿using Cake.Core;
+using Cake.Core;
 using Cake.Core.Annotations;
 using Cake.Common;
 using Cake.Common.Diagnostics;
@@ -61,6 +61,8 @@ public static class GitHooks
 
     private static void CopyGitHooks(this ICakeContext ctx, GitHooksSettings? settings = null)
     {
+        LoggingAliases.Warning(ctx, "WARNING: This method will overwrite your currently deployed hooks.");
+        
         GitHooksSettings effectiveSettings = settings ?? DefaultSettings;
         
         var hooksSourcePath = "./hooks";
@@ -89,7 +91,7 @@ public static class GitHooks
             var sourceFilePath = Path.Combine(hooksSourcePath, hookFileName);
             var destinationFilePath = Path.Combine(hooksDestinationPath, hookFileName);
 
-            File.Copy(sourceFilePath, destinationFilePath);
+            File.Copy(sourceFilePath, destinationFilePath, true);
 
             // Ensure the hook is executable
             File.SetAttributes(destinationFilePath, FileAttributes.Normal);
