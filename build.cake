@@ -35,7 +35,8 @@ Setup(context =>
     msBuildSettings
         .WithProperty("Version", $"{version.FullSemVer}")
         .WithProperty("PackageVersion", $"{version.FullSemVer}")
-        .WithProperty("FileVersion", $"{version.FullSemVer}.0");
+        .WithProperty("FileVersion", $"{version.AssemblySemFileVer}")
+        .WithProperty("InformationalVersion", $"{version.InformationalVersion}");
 });
 
 ///////////////////////////////////////////////////////////////////////////////
