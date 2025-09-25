@@ -31,6 +31,12 @@ Setup(context =>
 
     Information($"Solution: {solution}");
     Information($"Version:  {version.FullSemVer}");
+
+    msBuildSettings
+        .WithProperty("Version", $"{version.FullSemVer}")
+        .WithProperty("PackageVersion", $"{version.FullSemVer}")
+        .WithProperty("FileVersion", $"{version.AssemblySemFileVer}")
+        .WithProperty("InformationalVersion", $"{version.InformationalVersion}");
 });
 
 ///////////////////////////////////////////////////////////////////////////////
